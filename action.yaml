@@ -48,7 +48,7 @@ runs:
         method: 'POST'
         bearerToken: '${{ inputs.orca_api_key }}'
         customHeaders: '{	"Content-Type": "multipart/form-data","cache-control": "no-cache"}'
-        files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }} " }'
+        files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}" }'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
