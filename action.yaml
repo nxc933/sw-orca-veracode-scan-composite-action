@@ -36,11 +36,6 @@ outputs:
      description: Orca Veracode scan Http response 
      value: ${{ steps.post.outputs.response }}
   
-   
-outputs:
-  response: 
-     description: Orca Qualys scan Http response 
-     value: ${{ steps.post.outputs.response }}
 runs:
   using: "composite"
   steps: 
