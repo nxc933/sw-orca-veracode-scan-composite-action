@@ -10,6 +10,11 @@ Name | Type |   | Default | Note |
 `orca_url` | String | *Optional* | `https://orca.sherwin.com` | 
 `request_timeout` | Integer | *Optional* | `20000` | 
 
+### Response
+| Variable |  Description  |
+|---|---|
+`response` | Response as JSON String
+
 Usage:
 
 ```yaml
