@@ -1,0 +1,61 @@
+name: Orca Veracode scan
+description: Composite action for Orca Veracode scan
+author: DA Team <da.team@sherwin.com>
+
+inputs:
+
+  artifact_path: 
+    required: true
+    default: '${{ github.workspace }}'
+    description: 'Path to the artifact that needs to be scanned'
+
+  artifact_name:
+    required: true
+    description: 'Name of the artifact to be scanned'
+
+  config_id:
+    required: true
+    description: Provide the orca config id for Veracode
+    
+  orca_api_key:
+    required: true
+    description: Provide Orca API KEY
+  
+  orca_url:
+    required: false
+    default: 'https://orca.sherwin.com'
+    
+  request_timeout: 
+    required: false
+    default: 20000
+    description: Provide the http requst timeout. Defaults to 20s
+
+outputs:
+
+  response: 
+     description: Orca Veracode scan Http response 
+     value: ${{ steps.post.outputs.response }}
+  
+   
+outputs:
+  response: 
+     description: Orca Qualys scan Http response 
+     value: ${{ steps.post.outputs.response }}
+runs:
+  using: "composite"
+  steps: 
+  
+    - name: Orca HTTP Request Action
+      id: post
+      uses: fjogeleit/http-request-action@v1.8.1
+      with:
+        url: ${{ inputs.orca_url }}/config/${{ inputs.config_id }}/exec
+        method: 'POST'
+        bearerToken: '${{ inputs.orca_api_key }}'
+        customHeaders: '{	"Content-Type": "multipart/form-data","cache-control": "no-cache"}'
+        files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }} " }'
+        timeout: ${{ inputs.request_timeout }}
+      
+branding:
+  icon: git-branch
+  color: white
