@@ -3,7 +3,10 @@ description: Composite action for Orca Veracode scan
 author: DA Team <da.team@sherwin.com>
 
 inputs:
-
+  config_id:
+    required: true
+    description: Provide the orca config id for Qualys
+    
   artifact_path: 
     required: true
     default: '${{ github.workspace }}'
@@ -23,7 +26,7 @@ inputs:
   
   orca_url:
     required: false
-    default: 'https://orca.sherwin.com'
+    default: 'https://orca.sherwin.com/api/v2/file/'
     
   request_timeout: 
     required: false
@@ -39,16 +42,31 @@ outputs:
 runs:
   using: "composite"
   steps: 
-  
-    - name: Orca HTTP Request Action
-      id: post
-      uses: fjogeleit/http-request-action@v1.8.1
+    - name: Delete leftover files
+      id: delete
+      uses: fjogeleit/http-request-action@v1.9.1
       with:
-        url: ${{ inputs.orca_url }}/config/${{ inputs.config_id }}/exec
+        url: 'https://orca.sherwin.com/api/v2/config/${{ inputs.config_id }}/delete_files/'
+        method: 'DELETE'
+        customHeaders: '{"Authorization":"${{ inputs.orca_api_key }}"}'
+        timeout: ${{ inputs.request_timeout }}
+  
+    - id: post
+      uses: fjogeleit/http-request-action@v1.9.1
+      with:
+        url: ${{ inputs.orca_url }}
         method: 'POST'
-        bearerToken: '${{ inputs.orca_api_key }}'
-        customHeaders: '{	"Content-Type": "multipart/form-data","cache-control": "no-cache"}'
-        files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}" }'
+        data: '{ "config":"${{ inputs.config_id }}", "type":"veracode_file", "file":"${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
+        customHeaders: '{	"Content-Type": "multipart/form-data","cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
+        timeout: ${{ inputs.request_timeout }}
+        
+    - id: post2
+      uses: fjogeleit/http-request-action@v1.9.1
+      with:
+        url: ${{ inputs.orca_url }}
+        method: 'POST'
+        data: '{ body: {"config":"${{ inputs.config_id }}"}'
+        customHeaders: '{	"Content-Type": "multipart/form-data","cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
