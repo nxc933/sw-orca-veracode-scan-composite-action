@@ -60,7 +60,7 @@ runs:
         customHeaders: '{"Content-Type": "multipart/form-data","cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
         
-    - id: post2
+    - id: post
       uses: fjogeleit/http-request-action@v1.9.1
       with:
         url: ${{ inputs.orca_url }}
