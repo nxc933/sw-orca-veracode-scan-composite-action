@@ -52,7 +52,7 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        contentType: 'multipart/form-data'
+        contentType: 'form/multipart'
         data: '{ "config":"${{ inputs.config_id }}", "type":"veracode_file", "file":"${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
         customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
@@ -62,7 +62,7 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        contentType: 'multipart/form-data'
+        contentType: 'form/multipart'
         data: '{ body: {"config":"${{ inputs.config_id }}"}'
         customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
