@@ -52,9 +52,8 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        contentType: 'form/multipart'
         data: '{ "config":"${{ inputs.config_id }}", "type":"veracode_file", "file":"${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
-        customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
+        customHeaders: '{"content-type":"multipart/form-data", "cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
         
     - id: post2
@@ -62,9 +61,8 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        contentType: 'form/multipart'
         data: '{ body: {"config":"${{ inputs.config_id }}"}'
-        customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
+        customHeaders: '{"content-type":"multipart/form-data", "cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
