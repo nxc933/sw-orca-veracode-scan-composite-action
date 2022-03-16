@@ -52,7 +52,7 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        data: '{"config":"${{ inputs.config_id }}", "type":"veracode_file"}'
+        data: '{"config":"${{ inputs.config_id }}", "type":"veracode_file", "contentType":"multipart/form-data"}'
         customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
         timeout: ${{ inputs.request_timeout }}
@@ -62,7 +62,7 @@ runs:
       with:
         url: ${{ inputs.orca_url }}
         method: 'POST'
-        data: '{"config":"${{ inputs.config_id }}", "type":"veracode_file"}'
+        data: '{"config":"${{ inputs.config_id }}", "type":"veracode_file", "contentType":"multipart/form-data"}'
         customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
         files: '{"file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
         timeout: ${{ inputs.request_timeout }}
