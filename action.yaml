@@ -30,10 +30,13 @@ inputs:
     description: Provide the http requst timeout. Defaults to 20s
 
 outputs:
-
   response: 
-     description: Orca Veracode scan Http response 
-     value: ${{ steps.post.outputs.response }}
+    description: Orca Veracode scan Http response 
+    value: ${{ steps.post.outputs.response }}
+  task-response:
+    description: Orca Veracode task Http response
+    value: ${{ steps.task.outputs.response }}
+     
   
 runs:
   using: "composite"
@@ -57,7 +60,7 @@ runs:
         files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
         timeout: ${{ inputs.request_timeout }}
         
-    - id: post2
+    - id: task
       uses: fjogeleit/http-request-action@v1.9.1
       with:
         url: 'https://orca.sherwin.com/api/v2/task/'
