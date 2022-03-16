@@ -63,6 +63,7 @@ runs:
         url: 'https://orca.sherwin.com/api/v2/task/'
         method: 'POST'
         data: '{"config":"${{ inputs.config_id }}"}'
+        customHeaders: '{"Authorization":"${{ inputs.orca_api_key }}"}'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
