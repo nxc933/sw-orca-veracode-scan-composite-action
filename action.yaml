@@ -60,11 +60,9 @@ runs:
     - id: post2
       uses: fjogeleit/http-request-action@v1.9.1
       with:
-        url: ${{ inputs.orca_url }}
+        url: 'https://orca.sherwin.com/api/v2/task/'
         method: 'POST'
-        data: '{"config":"${{ inputs.config_id }}", "type":"veracode_file", "contentType":"multipart/form-data"}'
-        customHeaders: '{"cache-control": "no-cache", "Authorization":"${{ inputs.orca_api_key }}"}'
-        files: '{"file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
+        data: '{"config":"${{ inputs.config_id }}"}'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
