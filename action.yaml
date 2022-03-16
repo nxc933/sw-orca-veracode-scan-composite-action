@@ -64,6 +64,7 @@ runs:
         method: 'POST'
         data: '{"config":"${{ inputs.config_id }}"}'
         customHeaders: '{"Authorization":"${{ inputs.orca_api_key }}"}'
+        contentType: 'application/json'
         timeout: ${{ inputs.request_timeout }}
       
 branding:
