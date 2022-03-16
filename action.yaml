@@ -57,15 +57,15 @@ runs:
         files: '{ "file": "${{ inputs.artifact_path }}/${{ inputs.artifact_name }}"}'
         timeout: ${{ inputs.request_timeout }}
         
-    - id: post2
-      uses: fjogeleit/http-request-action@v1.9.1
-      with:
-        url: 'https://orca.sherwin.com/api/v2/task/'
-        method: 'POST'
-        data: '{"config":"${{ inputs.config_id }}"}'
-        customHeaders: '{"Authorization":"${{ inputs.orca_api_key }}"}'
-        contentType: 'application/json'
-        timeout: ${{ inputs.request_timeout }}
+#     - id: post2
+#       uses: fjogeleit/http-request-action@v1.9.1
+#       with:
+#         url: 'https://orca.sherwin.com/api/v2/task/'
+#         method: 'POST'
+#         data: '{"config":"${{ inputs.config_id }}"}'
+#         customHeaders: '{"Authorization":"${{ inputs.orca_api_key }}"}'
+#         contentType: 'application/json'
+#         timeout: ${{ inputs.request_timeout }}
       
 branding:
   icon: git-branch
