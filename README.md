@@ -23,7 +23,7 @@ Name | Type |   | Default | Note |
 Usage:
 
 ```yaml
- - uses: sherwin-williams-co/sw-orca-veracode-scan-composite-action@main
+ - uses: sherwin-williams-co/sw-orca-veracode-scan-composite-action@v2.0
    with:
      artifact_path: '${{ github.workspace }}'
      artifact_name: 'HelloWorld.jar'
