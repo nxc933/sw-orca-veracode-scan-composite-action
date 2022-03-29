@@ -30,7 +30,7 @@ Usage:
      config_id: 1
      orca_api_key: '${{ secrets.ORCA_API_TOKEN }}'
      # Optional
-     # orca_url: '''
+     # orca_url: ''
      # request_timeout: '20000'
      
 ```
